@@ -4,6 +4,7 @@ import { useWeb3 } from '@3rdweb/hooks';
 import { ThirdwebSDK } from '@3rdweb/sdk';
 import { UnsupportedChainIdError } from '@web3-react/core';
 
+
 // instantiate sdk on Rinkeby
 const sdk = new ThirdwebSDK('rinkeby');
 
