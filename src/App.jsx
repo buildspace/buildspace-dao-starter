@@ -1,30 +1,31 @@
-import { useEffect, useMemo, useState } from "react";
-import { ethers } from "ethers";
-import { useWeb3 } from "@3rdweb/hooks";
-import { ThirdwebSDK } from "@3rdweb/sdk";
+import { useEffect, useMemo, useState } from 'react';
+import { ethers } from 'ethers';
+import { useWeb3 } from '@3rdweb/hooks';
+import { ThirdwebSDK } from '@3rdweb/sdk';
+import { UnsupportedChainIdError } from '@web3-react/core';
 
 // instantiate sdk on Rinkeby
-const sdk = new ThirdwebSDK("rinkeby");
+const sdk = new ThirdwebSDK('rinkeby');
 
 // grab reference to ERC-1155 contract
 const bundleDropModule = sdk.getBundleDropModule(
-  "0x985502B5899f8BeE68ec659A8490f26f1Af74213",
+  '0x985502B5899f8BeE68ec659A8490f26f1Af74213',
 );
 
 // token module ERC-20 contract
 const tokenModule = sdk.getTokenModule(
-  "0x5758f59B45610c28f2D3c40384684d505a8B8391"
+  '0x5758f59B45610c28f2D3c40384684d505a8B8391'
 );
 
 // vote module 
 const voteModule = sdk.getVoteModule(
-  "0xe23a2234F2cE1ADae589c3f1893ECb53334070Ea",
+  '0xe23a2234F2cE1ADae589c3f1893ECb53334070Ea',
 );
 
 const App = () => {
   // use connectWallet provided by ThirdWeb
   const { connectWallet, address, error, provider } = useWeb3();
-  console.log("👋 Address:", address)
+  console.log('👋 Address:', address)
 
   // signer to sign txns
   const signer = provider ? provider.getSigner() : undefined;
@@ -66,10 +67,10 @@ const App = () => {
       .then((proposals) => {
         // set state
         setProposals(proposals);
-        console.log("🌈 Proposals", proposals)
+        console.log('🌈 Proposals', proposals)
       })
       .catch((err) => {
-        console.error("Failed to get proposals", err);
+        console.error('Failed to get proposals', err);
       });
   }, [hasClaimedNFT]);
 
@@ -90,10 +91,10 @@ const App = () => {
       .hasVoted(proposals[0].proposalId, address)
       .then((hasVoted) => {
         setHasVoted(hasVoted);
-        console.log("🥵 User has already voted")
+        console.log('🥵 User has already voted')
       })
       .catch((err) => {
-        console.error("Failed to check if wallet has voted", err);
+        console.error('Failed to check if wallet has voted', err);
       });
   }, [hasClaimedNFT, proposals, address]);
 
@@ -107,11 +108,11 @@ const App = () => {
     bundleDropModule
       .getAllClaimerAddresses("0")
       .then((addresses) => {
-        console.log("🚀 Members addresses", addresses)
+        console.log('🚀 Members addresses', addresses)
         setMemberAddresses(addresses);
       })
       .catch((err) => {
-        console.error("Failed to get member list",err);
+        console.error('Failed to get member list', err);
       });
   }, [hasClaimedNFT]);
 
@@ -124,11 +125,11 @@ const App = () => {
     tokenModule
       .getAllHolderBalances()
       .then((amounts) => {
-        console.log("👜 Amounts", amounts)
+        console.log('👜 Amounts', amounts)
         setMemberTokenAmounts(amounts);
       })
       .catch((err) => {
-        console.error("Failed to get token amounts", err);
+        console.error('Failed to get token amounts', err);
       });
   }, [hasClaimedNFT]);
 
@@ -165,34 +166,21 @@ const App = () => {
         // is balance > 0, they have membership NFT
         if (balance.gt(0)) {
           setHasClaimedNFT(true);
-          console.log("🌟 this user has a membership NFT!")
+          console.log('🌟 this user has a membership NFT!')
         } else {
           setHasClaimedNFT(false);
-          console.log("😭 this user doesn't have a membership NFT.")
+          console.log('😭 this user does not have a membership NFT.')
         }
       })
       .catch((error) => {
         setHasClaimedNFT(false);
-        console.log("Failed to NFT balance", error);
+        console.log('Failed to NFT balance', error);
       });
   }, [address]);
 
-  // lets unconnected users connect with app by calling connectWallet
-  if (!address) {
+  if (error instanceof UnsupportedChainIdError) {
     return (
-      <div className="landing">
-        <h1>Welcome to KenyaDAO</h1>
-        <h2>Kenya's home for Web3 enthusiasts.</h2>
-        <button onClick={() => connectWallet("injected")} className="btn-hero">
-          Connect your Wallet
-        </button>
-      </div>
-    );
-  }
-
-  if (error && error.name === "UnsupportedChainIdError") {
-    return (
-      <div className="unsupported-network">
+      <div className='unsupported-network'>
         <h2>Please connect to Rinkeby</h2>
         <p>
           This dapp only works on the Rinkeby Test Network, please switch networks
@@ -202,11 +190,24 @@ const App = () => {
     );
   }
 
+  // lets unconnected users connect with app by calling connectWallet
+  if (!address) {
+    return (
+      <div className="landing">
+        <h1>Welcome to KenyaDAO</h1>
+        <h2>Kenya's home for Web3 enthusiasts</h2>
+        <button onClick={() => connectWallet("injected")} className="btn-hero">
+          Connect your Wallet
+        </button>
+      </div>
+    );
+  }
+
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
         <h1>KenyaDAO Member Page</h1>
-        <p>Congratulations on being a member</p>
+        <p>Congratulations on being a member 🎉</p>
         <div>
           <div>
             <h2>Member List</h2>
@@ -305,13 +306,13 @@ const App = () => {
                       // and log out a success message
                       console.log("successfully voted");
                     } catch (err) {
-                      console.error("failed to execute votes", err);
+                      console.error("Failed to execute votes", err);
                     }
                   } catch (err) {
-                    console.error("failed to vote", err);
+                    console.error("Failed to vote", err);
                   }
                 } catch (err) {
-                  console.error("failed to delegate tokens");
+                  console.error("Failed to delegate tokens");
                 } finally {
                   // in *either* case we need to set the isVoting state to false to enable the button again
                   setIsVoting(false);
@@ -380,7 +381,7 @@ const App = () => {
               setHasClaimedNFT(true);
               // Show user their fancy new NFT!
               console.log(
-                `Successfully Minted! Check it our on OpenSea: https://testnets.opensea.io/assets/${bundleDropModule.address}/0`
+                `Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${bundleDropModule.address}/0`
               );
             });
         }}
