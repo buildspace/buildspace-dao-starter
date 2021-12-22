@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ethers } from "ethers";
 import { useWeb3 } from "@3rdweb/hooks";
-import { ThirdwebSDK, TokenModule } from "@3rdweb/sdk";
+import { ThirdwebSDK } from "@3rdweb/sdk";
 
 // instantiate sdk on Rinkeby
 const sdk = new ThirdwebSDK("rinkeby");
@@ -182,6 +182,7 @@ const App = () => {
     return (
       <div className="landing">
         <h1>Welcome to KenyaDAO</h1>
+        <h2>Kenya's home for Web3 enthusiasts.</h2>
         <button onClick={() => connectWallet("injected")} className="btn-hero">
           Connect your Wallet
         </button>
@@ -348,7 +349,7 @@ const App = () => {
               </button>
               <small>
                 This will trigger multiple transactions that you will need to
-                sign.
+                sign
               </small>
             </form>
           </div>
