@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ethers } from "ethers";
 import { useWeb3 } from "@3rdweb/hooks";
-import { ThirdwebSDK, TokenModule } from "@3rdweb/sdk";
+import { ThirdwebSDK } from "@3rdweb/sdk";
 
 // instantiate sdk on Rinkeby
 const sdk = new ThirdwebSDK("rinkeby");
