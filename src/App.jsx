@@ -22,7 +22,7 @@ const App = () => {
   const [isClaiming, setIsClaiming] = useState(false);
 
   const [memberTokenAmounts, setMemberTokenAmounts] = useState({});
-  const [memberAddresses, setMemberAddress] = useState([]);
+  const [memberAddresses, setMemberAddresses] = useState([]);
 
   const shortenAddress = (str) => {
     return str.substring(0, 6) + "..." + str.substring(str.length - 4);
@@ -113,7 +113,7 @@ const App = () => {
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
-        <h1>🍪DAO Member Page</h1>
+        <h1>🌳DAO Member Page</h1>
         <p>Congratulations on being a member</p>
         <div>
           <div>
