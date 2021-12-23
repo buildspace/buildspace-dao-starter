@@ -1,10 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
+import { ethers } from "ethers";
 import { ThirdwebSDK } from "@3rdweb/sdk";
 import { useWeb3 } from "@3rdweb/hooks";
 
 const sdk = new ThirdwebSDK("rinkeby");
 const bundleDropModule = sdk.getBundleDropModule(
   "0x479650B846ce9Fa49d5090B0D43760b6F995E390",
+)
+const tokenModule = sdk.getTokenModule(
+  "0x3CD6F6123A3FE1337ed34b4e1530B5f2F9855c61",
 )
 
 const App = () => {
@@ -16,6 +20,58 @@ const App = () => {
   const [hasClaimedNFT, setHasClaimedNFT] = useState(false);
 
   const [isClaiming, setIsClaiming] = useState(false);
+
+  const [memberTokenAmounts, setMemberTokenAmounts] = useState({});
+  const [memberAddresses, setMemberAddress] = useState([]);
+
+  const shortenAddress = (str) => {
+    return str.substring(0, 6) + "..." + str.substring(str.length - 4);
+  };
+
+  useEffect(() => {
+    if (!hasClaimedNFT) {
+      return;
+    }
+    bundleDropModule
+        .getAllClaimerAddresses("0")
+        .then((addresess) => {
+          console.log("🚀 Members addresses", addresess)
+          setMemberAddresses(addresess);
+        })
+        .catch((err) => {
+          console.error("failed to get member list", err);
+        });
+  }, [hasClaimedNFT]);
+
+  useEffect(() => {
+    if (!hasClaimedNFT) {
+      return;
+    }
+
+    tokenModule
+      .getAllHolderBalances()
+      .then((amounts) => {
+        console.log("👜 Amounts", amounts)
+        setMemberTokenAmounts(amounts);
+      })
+      .catch((err) => {
+        console.error("failed to get token amounts", err);
+      });
+  }, [hasClaimedNFT]);
+
+  const memberList = useMemo(() => {
+    return memberAddresses.map((address) => {
+      return {
+        address,
+        tokenAmount: ethers.utils.formatUnits(
+          // If the address isn't in memberTokenAmounts, it means they don't
+          // hold any of our token.
+          memberTokenAmounts[address] || 0,
+          18,
+        ),
+      };
+    });
+  }, [memberAddresses, memberTokenAmounts]);
 
   useEffect(() => {
     sdk.setProviderOrSigner(signer);
