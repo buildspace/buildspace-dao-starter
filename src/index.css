@@ -4,7 +4,7 @@ body {
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #7700ee;
+  background: linear-gradient(#3f87a6, #ebf8e1, #f69d3c);
   color: #fff;
   overflow-x: hidden;
 }
@@ -55,6 +55,7 @@ h1 {
   align-content: center;
   display: flex;
   text-align: center;
+  color:#222;
 }
 
 .member-page > div {
