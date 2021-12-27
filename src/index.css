@@ -7,6 +7,7 @@ body {
   background-color: #7700ee;
   color: #fff;
   overflow-x: hidden;
+  z-index: 999147483647;
 }
 #root {
   min-height: 100vh;
@@ -138,4 +139,27 @@ button:focus {
 button:disabled {
   opacity: 0.8;
   pointer-events: none;
+}
+
+.loader {
+  border: 16px solid #fff;
+  border-top: 16px solid #7700ee;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  flex-direction: column;
+  margin: auto;
+  align-content: center;
+  display: flex;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
