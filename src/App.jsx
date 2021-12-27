@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { useState, useEffect, useMemo } from "react";
 import { useWeb3 } from "@3rdweb/hooks";
+import { UnsupportedChainIdError } from "@web3-react/core";
 import { ThirdwebSDK } from "@3rdweb/sdk";
 import dotenv from "dotenv";
 dotenv.config();
@@ -168,10 +169,23 @@ const App = () => {
     sdk.setProviderOrSigner(signer);
   }, [signer]);
 
+  
   if (hasClaimedNFT === undefined || !provider) {
     return <div className="loader" />;
   }
-
+  
+  if (error instanceof UnsupportedChainIdError) {
+    return (
+      <div className="unsupported-network">
+        <h2>Please connect to Rinkeby</h2>
+        <p>
+          This dapp only works on the Rinkeby network, please switch networks in
+          your connected wallet.
+        </p>
+      </div>
+    );
+  }
+  
   if (error) {
     return <div className="error">{error.message}</div>;
   }
