@@ -4,8 +4,9 @@ body {
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #7700ee;
-  color: #fff;
+  background-image: url("meme.jpeg");
+  background-size: contain;
+  color: #007bee;
   overflow-x: hidden;
 }
 #root {
