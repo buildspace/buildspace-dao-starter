@@ -5,7 +5,9 @@ import {
   useEditionDrop,
   useMetamask,
   useVote,
+  useNetwork,
 } from '@thirdweb-dev/react';
+import { ChainId } from '@thirdweb-dev/sdk';
 import { useState, useEffect, useMemo } from 'react';
 import KeycultPic from './assets/keycult.jpeg';
 
@@ -13,7 +15,7 @@ const App = () => {
   // Use the hooks thirdweb give us.
   const address = useAddress();
   const connectWithMetamask = useMetamask();
-  console.log('👋 Address:', address);
+  const network = useNetwork();
 
   const editionDrop = useEditionDrop('0x54370BF2e0747138864A03E3B201096C233ade54');
   const [hasClaimedNFT, setHasClaimedNFT] = useState(false);
@@ -166,6 +168,18 @@ const App = () => {
         <button onClick={connectWithMetamask} className="btn-hero">
           Connect your wallet
         </button>
+      </div>
+    );
+  }
+
+  if (network?.[0].data.chain.id !== ChainId.Rinkeby) {
+    return (
+      <div className="unsupported-network">
+        <h2>Please connect to Rinkeby</h2>
+        <p>
+          This dapp only works on the Rinkeby network, please switch networks in your connected
+          wallet.
+        </p>
       </div>
     );
   }
