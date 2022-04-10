@@ -6,10 +6,12 @@ import { AddressZero } from "@ethersproject/constants";
 const App = () => {
   // Use the hooks thirdweb give us.
   const address = useAddress();
+  const network = useNetwork();
   const connectWithMetamask = useMetamask();
   console.log("👋 Address:", address);
 
-  const network = useNetwork();
+  
+  console.log("Network:", network)
 
   // Initialize our editionDrop contract
   const editionDrop = useEditionDrop("0x6288757CC1d20E19d48Fc44C99Eb222C3A2cEAD5");
@@ -177,17 +179,7 @@ const App = () => {
       setIsClaiming(false);
     }
   };
-  if (network?.[0].data.chain.id !== ChainId.Rinkeby) {
-    return (
-      <div className="unsupported-network">
-        <h2>Please connect to Rinkeby</h2>
-        <p>
-          This dapp only works on the Rinkeby network, please switch networks
-          in your connected wallet.
-        </p>
-      </div>
-    );
-  }
+  // console.log(network?.[0])
   // if (network?.[0].data.chain.id !== ChainId.Rinkeby) {
   //   return (
   //     <div className="unsupported-network">
