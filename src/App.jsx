@@ -57,9 +57,9 @@ const App = () => {
   if (!address) {
     return (
       <div className="landing">
-        <h1>Welcome to NarutoDAO</h1>
+        <h1>Welcome to PeopleDAO</h1>
         <button onClick={connectWithMetamask} className="btn-hero">
-          Connect your wallet
+          Connect your wallet and vote
         </button>
       </div>
     );
