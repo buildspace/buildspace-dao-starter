@@ -13,7 +13,7 @@ body {
 }
 
 #root {
-  min-height: 100vh;
+  min-height: 30;
   display: flex;
 }
 
@@ -128,6 +128,27 @@ h2.centrado{
   box-shadow: 3.1px 6.2px 6.2px hsl(0deg 0% 0% / 0.4);
 
   
+}
+
+.cardtwo {
+  background-color: rgba(255, 255, 255, 0.87);
+  padding: 1rem;
+  border-radius: 5rem;
+  color: #000;
+  box-shadow: 3.1px 6.2px 6.2px hsl(0deg 0% 0% / 0.4);
+
+  
+}
+
+.cardthree{
+  position: absolute;
+  top: 50%;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 1rem;
+  border-radius: 1rem;
+  color: #000;
+  box-shadow: 3.1px 6.2px 6.2px hsl(0deg 0% 0% / 0.4);
+
 }
 
 button {

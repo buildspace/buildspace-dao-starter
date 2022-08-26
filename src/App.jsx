@@ -197,10 +197,15 @@ const memberList = useMemo(() => {
     return (
       <div className="landing">
         <h1>Welcome to PeopleDAO</h1>
+        <p class="cardtwo">This is a social scoring DAO <strong> inspiring in Nosedive from BlackMirror,</strong> whereby you can vote in ballots by acquiring the NFT from the platform and the more tokens you have, the more social score you get! You can give tokens directly in the voting system!  </p>
         <button onClick={connectWithMetamask} className="btn-hero">
           Connect your wallet and vote
         </button>
+        <iframe class="cardthree" width="900" height="300" src="https://www.youtube.com/embed/R32qWdOWrTo" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
+
+
+
     );
   }
 

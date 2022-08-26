@@ -10,8 +10,8 @@ const token = sdk.getToken("0x2876dA8AEEbe174b915161Bbb0A529D351E07149");
 (async () => {
     try {
       // Create proposal to mint 420,000 new token to the treasury.
-      const amount = 420_000;
-      const description = "Should the DAO mint an additional " + amount + " tokens into the treasury?";
+      const amount = 200;
+      const description = "Should Sofia get the amount of  " + amount + " tokens based on her social statistics?";
       const executions = [
         {
           // Our token contract that actually executes the mint.
@@ -35,7 +35,7 @@ const token = sdk.getToken("0x2876dA8AEEbe174b915161Bbb0A529D351E07149");
   
       await vote.propose(description, executions);
 
-      console.log("✅ Successfully created proposal to mint tokens");
+      console.log("✅ Successfully created proposal allow Sofia get her tokens");
   } catch (error) {
     console.error("failed to create first proposal", error);
     process.exit(1);
@@ -43,8 +43,8 @@ const token = sdk.getToken("0x2876dA8AEEbe174b915161Bbb0A529D351E07149");
 
   try {
     // Create proposal to transfer ourselves 6,900 tokens for being awesome.
-    const amount = 6_900;
-    const description = "Should the DAO transfer " + amount + " tokens from the treasury to " +
+    const amount = 400;
+    const description = "Based on bruno's track record (who helped make this application)  and behaviors should  " + amount + " be given? " +
       process.env.WALLET_ADDRESS + " for being awesome?";
     const executions = [
       {
@@ -65,9 +65,13 @@ const token = sdk.getToken("0x2876dA8AEEbe174b915161Bbb0A529D351E07149");
     await vote.propose(description, executions);
 
     console.log(
-      "✅ Successfully created proposal to reward ourselves from the treasury, let's hope people vote for it!"
+      "✅ Successfully created proposal giving rewards to Bruno "
     );
   } catch (error) {
     console.error("failed to create second proposal", error);
   }
+
+  //--------------
+
+  
 })();
