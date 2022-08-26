@@ -7,7 +7,11 @@ body {
   background-color: #7700ee;
   color: #fff;
   overflow-x: hidden;
+  background: linear-gradient(to right, #2193b0, #6dd5ed, #7700ee); 
+  justify-content: center;
+  align-items: center;
 }
+
 #root {
   min-height: 100vh;
   display: flex;
@@ -94,24 +98,36 @@ h1 {
 .member-page form h5 {
   margin-top: 0;
   color: #7700ee;
+
 }
 
 .member-page form .card > div {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
+  
 }
 
 .member-page form small {
   text-align: center;
 }
 
+h2.centrado{
+  position: absolute;
+   top: 91%;
+   left: 69%;
+   margin: -15% 0 0 -25%;
+
+}
+
 .card {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.87);
   padding: 1rem;
   border-radius: 1rem;
   color: #000;
   box-shadow: 3.1px 6.2px 6.2px hsl(0deg 0% 0% / 0.4);
+
+  
 }
 
 button {
