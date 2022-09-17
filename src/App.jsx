@@ -17,7 +17,7 @@ const App = () => {
   }
   return (
     <div className="landing">
-      <h1>👀 wallet connected 🔗, LFG 🚀 </h1>
+      <h1>Wallet connected ✅, Time to #Builddit! </h1>
     </div>
   );
 };
