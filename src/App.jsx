@@ -70,7 +70,7 @@ const App = () => {
     return (
       <div className="member-page">
         <h1>🧱🤝🌐 BuildditDAO Member Page</h1>
-        <h3>Welcome to the community, Together we build.</h3>
+        <h3>Welcome to the community, together we build.</h3>
       </div>
     );
   }
