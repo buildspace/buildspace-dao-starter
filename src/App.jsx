@@ -1,9 +1,11 @@
-import { useAddress, useMetamask, useEditionDrop, useToken, useVote } from "@thirdweb-dev/react";
+import { useAddress, useMetamask, useEditionDrop, useToken, useVote, useNetwork } from "@thirdweb-dev/react";
+import { ChainId } from "@thirdweb-dev/sdk";
 import { useState, useEffect, useMemo } from "react";
 import { AddressZero } from "@ethersproject/constants";
 
 const App = () => {
   const address = useAddress();
+  const network = useNetwork();
   const connectWithMetamask = useMetamask();
   console.log("👋🏾 Address", address);
 
@@ -168,6 +170,15 @@ const App = () => {
     }
   };
 
+  if (address && network?.[0].data.chain.id !== ChainId.Goerli) {
+    return (
+      <div className="unsupported-network">
+        <h2>Please connect to Goerli</h2>
+        <p>This dapp only works on the Goerli network, please switch networks in your connected wallet.</p>
+      </div>
+    );
+  }
+
   // This is the case where the users hasn't connected their wallet
   // to your web app. Let them call connectWallet.
   if (!address) {
@@ -186,6 +197,9 @@ const App = () => {
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
+        {/* <div className="apple-founders">
+          <img src="/jobs-and-woz.png" alt="Jobs and Woz" />
+        </div> */}
         <h1>🧱🤝🌐 BuildditDAO Member Page</h1>
         <p>Welcome to the community, together we build</p>
         <div>
@@ -240,11 +254,11 @@ const App = () => {
 
                 // first we need to make sure the user delegates their token to vote
                 try {
-                  //we'll check if the wallet still needs to delegate their tokens before they can vote
+                  // we'll check if the wallet still needs to delegate their tokens before they can vote
                   const delegation = await token.getDelegationOf(address);
                   // if the delegation is the 0x0 address that means they have not delegated their governance tokens yet
                   if (delegation === AddressZero) {
-                    //if they haven't delegated their tokens yet, we'll have them delegate them before voting
+                    // if they haven't delegated their tokens yet, we'll have them delegate them before voting
                     await token.delegateTo(address);
                   }
                   // then we need to vote on the proposals
@@ -264,7 +278,7 @@ const App = () => {
                       })
                     );
                     try {
-                      // if any of the propsals are ready to be executed we'll need to execute them
+                      // if any of the proposals are ready to be executed we'll need to execute them
                       // a proposal is ready to be executed if it is in state 4
                       await Promise.all(
                         votes.map(async ({ proposalId }) => {
