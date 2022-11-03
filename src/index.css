@@ -114,6 +114,11 @@ h1 {
   box-shadow: 3.1px 6.2px 6.2px hsl(0deg 0% 0% / 0.4);
 }
 
+.btn-hero {
+  margin: auto;
+  width: 250px;
+}
+
 button {
   cursor: pointer;
   background-color: #000;
