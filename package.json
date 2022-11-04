@@ -1,13 +1,13 @@
 {
   "name": "mydao",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "dependencies": {
-    "@thirdweb-dev/react": "^2.3.0",
-    "@thirdweb-dev/sdk": "^2.2.11",
+    "@thirdweb-dev/react": "^3.5.1",
+    "@thirdweb-dev/sdk": "^3.5.1",
     "ethers": "^5.6.6",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.2",
+    "react-dom": "^18.0.2",
     "react-scripts": "5.0.0"
   },
   "scripts": {
