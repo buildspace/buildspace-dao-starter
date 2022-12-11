@@ -21,7 +21,8 @@ const sdk = ThirdwebSDK.fromPrivateKey(
   // Your wallet private key. ALWAYS KEEP THIS PRIVATE, DO NOT SHARE IT WITH ANYONE, add it to your .env file and do not commit that file to github!
   process.env.PRIVATE_KEY,
   // RPC URL, we'll use our QuickNode API URL from our .env file.
-  process.env.QUICKNODE_API_URL
+  // process.env.QUICKNODE_API_URL
+  process.env.ALCHEMY_API_URL
 );
 
 (async () => {
