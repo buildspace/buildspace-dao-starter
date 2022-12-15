@@ -1,4 +1,4 @@
-import { useAddress, ConnectWallet, Web3Button, useContract, useNFTBalance, useChainId } from '@thirdweb-dev/react';
+import { useAddress, ConnectWallet, Web3Button, useContract, useNFTBalance, useChainId, ChainId } from '@thirdweb-dev/react';
 import { useState, useEffect, useMemo } from 'react';
 import { AddressZero } from "@ethersproject/constants";
 
@@ -140,7 +140,7 @@ const App = () => {
 
   // This is the case where the user hasn't connected their wallet
   // to your web app. Let them call connectWallet.
-  if (actualChainId && actualChainId !== 80001) {
+  if (actualChainId && actualChainId !== ChainId.Mumbai) {
     return (
       <div className="unsupported-network">
         <h2>Please connect to Polygon Mumbai</h2>
