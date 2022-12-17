@@ -11,7 +11,7 @@ import './assets/scss/style.scss';
 const history = createBrowserHistory();
 
 // This is the chainId your dApp will work on.
-const activeChainId = ChainId.Mumbai;
+const activeChainId = ChainId.Polygon;
 
 const container = document.getElementById('root');
 const root = createRoot(container);
