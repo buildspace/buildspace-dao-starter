@@ -9,10 +9,10 @@ const Community = () => {
   console.log("👋 Address:", address);
 
   // Initialize our Edition Drop contract
-  const editionDropAddress = "0xCb6b74e5525919D62e819504Ea6524A909558137"
+  const editionDropAddress = "0xA771451e6486734a394cDC31eDCc8C60e8599eF4"
   const { contract: editionDrop } = useContract(editionDropAddress, "edition-drop");
-  const { contract: token } = useContract('0x50F2c10847A9879aA52743Ae6d7472d477478968', 'token');
-  const { contract: vote } = useContract("0xc7c2f778186560684A99d7bAcF9dfE453eA94E7D", "vote");
+  const { contract: token } = useContract('0x4245B269Dc5fC9d81d127178a7188da417B189E1', 'token');
+  const { contract: vote } = useContract("0x58bE0DFe2823459096459Cfb02729617e71B619B", "vote");
 
   // A fancy function to shorten someones wallet address, no need to show the whole thing.
   const shortenAddress = (str) => {
@@ -141,11 +141,11 @@ const Community = () => {
 
   // This is the case where the user hasn't connected their wallet
   // to your web app. Let them call connectWallet.
-  if (actualChainId && actualChainId !== ChainId.Mumbai) {
+  if (actualChainId && actualChainId !== ChainId.Polygon) {
     return (
       <div className="center-content">
-        <h2>Please connect to Polygon Mumbai</h2>
-        <small>Unfortunately, your wallet is using an invalid blockchain. Please switch to Mumbai.</small>
+        <h2>Please connect to Polygon Mainnet</h2>
+        <small>Unfortunately, your wallet is using an invalid blockchain. Please switch to Polygon.</small>
       </div>
     );
   }
@@ -343,7 +343,7 @@ const Community = () => {
               const tx = await contract.erc1155.claim(0, 1);
               const receipt = tx.receipt; // the transaction receipt
               console.log(receipt);
-              setClaimed(`https://mumbai.polygonscan.com/tx/${receipt.transactionHash}`);
+              setClaimed(`https://polygonscan.com/tx/${receipt.transactionHash}`);
             }}
             onSuccess={() => {
               console.log(`🌊 Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`);
